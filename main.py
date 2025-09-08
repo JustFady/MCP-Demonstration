@@ -1,0 +1,64 @@
+# main program that demonstrates MCP (Model Context Protocol) integration
+# this shows how AI agents could use these tools to analyze NBA data
+
+from data_generator import createNbaData, saveDataForMcp, getEraStatsForMcp
+from plotter import *
+from stats_calculator import runAllStats, getMcpStatsAnalysis
+
+import matplotlib.pyplot as plt
+import json
+
+# this is how MCP would work as an NBA analysis tools
+def demonstrateMcpUsage():
+    print("=" * 60)
+    print("MCP TOOLS DEMONSTRATION")
+    print("=" * 60)
+
+    # simulate an AI agent requesting era-specific data through MCP
+    print("1. AI Agent Request: 'Get stats for Modern Era'")
+    analyticsStats = getEraStatsForMcp("Modern era")
+    print("\tMCP Response:")
+    print(json.dumps(analyticsStats, indent=4))
+
+    print("\n" + "-" * 50)
+
+    # simulate AI requesting structured analysis
+    print("2. AI Agent Request: 'Provide comprehensive statistical analysis'")
+    nbaData = createNbaData()
+    mcpAnalysis = getMcpStatsAnalysis(nbaData)
+    print("   MCP Response:")
+    print(json.dumps(mcpAnalysis, indent=4))
+
+    print("\n" + "=" * 60)
+    print("This is how MCP enables AI agents to access our basketball tools!")
+    print("=" * 60)
+
+
+# runs the whole analysis with MCP integration
+def main():
+    print("NBA 3-Point Analysis with MCP Integration")
+    print("This demonstrates how AI agents could use these tools\n")
+
+    # get our realistic fake data
+    nbaData = createNbaData()
+
+    # demonstrate MCP protocol usage first
+    demonstrateMcpUsage()
+
+    # then show  analysis
+    print("\nNow running traditional statistical analysis...")
+    runAllStats(nbaData)
+
+    # create all the visualizations
+    print("\nGenerating plots... (close each window to see next one)")
+
+    # these function calls could be made by an AI agent via MCP
+    plotAttemptsTimeline(nbaData)
+    plotEraBoxplots(nbaData)
+
+    # save data in MCP-compatible format
+    saveDataForMcp()
+
+# standard python entry point
+if __name__ == "__main__":
+    main()
