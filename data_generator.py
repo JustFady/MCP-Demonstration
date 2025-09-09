@@ -13,8 +13,8 @@ def createNbaData():
             avgAttempts = np.random.normal(2.5 + (yr - 1984) * 0.1, 0.3)  # loc=mean, scale=std_dev
             shootingPct = np.random.normal(0.28, 0.02)
         elif yr < 2014:  # GSW transition
-            avgAttempts = np.random.normal(12 + (yr - 1997) * 0.3, 1.0)
-            shootingPct = np.random.normal(0.35, 0.015)
+            avgAttempts = np.random.normal(12 + (yr - 1997) * 0.3, 1.0) # # of attempts + (yr- min(year)) * mean, std_dev
+            shootingPct = np.random.normal(0.35, 0.015) # normal distro at 35% with .015 std_Dev
         else:  # modern nba boom
             avgAttempts = np.random.normal(22 + (yr - 2014) * 1.2, 2.0)
             shootingPct = np.random.normal(0.365, 0.01)
@@ -27,10 +27,10 @@ def createNbaData():
             'attemptsPerGame': avgAttempts,
             'threePtPct': max(0.2, min(0.4, shootingPct)),  # keep between 20-40% we don't need random 3s from non shooters
             'ptsPerGame': ptsFromThrees,
-            'era': getEraName(yr) #forloop above
+            'era': getEraName(yr)
         })
 
-    return pd.DataFrame(dataList)
+    return pd.DataFrame(dataList) # return new data list
 
 
 # era labels
@@ -78,11 +78,11 @@ def saveDataForMcp():
 
 # AI agent could call this to get specific era stats
 def getEraStatsForMcp(eraName):
-    df = createNbaData()
-    eraData = df[df['era'] == eraName]
+    df = createNbaData() # creates dataframe from what was made above
+    eraData = df[df['era'] == eraName] # era data come from era name
 
     if eraData.empty:
-        return {"error": f"Era '{eraName}' not found", "availableEras": df['era'].unique().tolist()}
+        return {"error": f"Era '{eraName}' not found"}
 
     # return structured data that MCP can easily parse and use
     return {
