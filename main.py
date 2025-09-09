@@ -1,11 +1,9 @@
-# main program that demonstrates MCP (Model Context Protocol) integration
 # this shows how AI agents could use these tools to analyze NBA data
 
 from data_generator import createNbaData, saveDataForMcp, getEraStatsForMcp
 from plotter import *
 from stats_calculator import runAllStats, getMcpStatsAnalysis
 
-import matplotlib.pyplot as plt
 import json
 
 # this is how MCP would work as an NBA analysis tools
@@ -26,7 +24,7 @@ def demonstrateMcpUsage():
     print("2. AI Agent Request: 'Provide comprehensive statistical analysis'")
     nbaData = createNbaData()
     mcpAnalysis = getMcpStatsAnalysis(nbaData)
-    print("   MCP Response:")
+    print("\tMCP Response:")
     print(json.dumps(mcpAnalysis, indent=4))
 
 # runs the whole analysis with MCP integration
@@ -47,6 +45,5 @@ def main():
     # save data in MCP-compatible format
     saveDataForMcp()
 
-# standard python entry point
 if __name__ == "__main__":
     main()

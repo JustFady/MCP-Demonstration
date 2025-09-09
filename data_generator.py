@@ -9,7 +9,7 @@ def createNbaData():
 
     for yr in years:
         # diff eras had diff shooting patterns, helps MCP understand trends
-        if yr < 1997:  # old school era
+        if yr < 1997:  # old  era
             avgAttempts = np.random.normal(2.5 + (yr - 1984) * 0.1, 0.3)  # loc=mean, scale=std_dev
             shootingPct = np.random.normal(0.28, 0.02)
         elif yr < 2014:  # GSW transition
@@ -36,9 +36,9 @@ def createNbaData():
 # era labels
 def getEraName(yr):
     if yr < 1997:
-        return "Old School"
+        return "Old Era"
     elif yr < 2014:
-        return "Growing Up"
+        return "New Era"
     else:
         return "Modern Era"
 
@@ -50,7 +50,7 @@ def saveDataForMcp():
     # save as CSV for human analysis
     df.to_csv('nba_data.csv', index=False)
 
-    # save as JSON for MCP tools - this is the key MCP integration part
+    # save as JSON for MCP tools
     dataDict = df.to_dict('records')  # converts df to list of dicts
     mcpOutput = {
         'metadata': {
@@ -73,7 +73,6 @@ def saveDataForMcp():
     with open('nba_data_mcp.json', 'w') as f:
         json.dump(mcpOutput, f, indent=2)
 
-    print("saved data in json format")
     return df
 
 

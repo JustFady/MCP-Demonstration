@@ -7,26 +7,22 @@ def printCoolStats(data):
     print("=" * 45)
 
     # split up data by era
-    oldSchool = data[data['era'] == 'Old School']
+    oldEra = data[data['era'] == 'Old Era']
+    newEra = data[data['era'] == 'New Era']
     modern = data[data['era'] == 'Modern Era']
 
-    print(f"\nOld School Days (1984-1996):")
-    print(f"  Average attempts: {oldSchool['attemptsPerGame'].mean():.1f} per game")
-    print(f"  Shooting pct: {oldSchool['threePtPct'].mean():.1%}")
+    print(f"\nOld Era Days (1984-1996):")
+    print(f"  Average attempts: {oldEra['attemptsPerGame'].mean():.1f} per game")
+    print(f"  Shooting pct: {oldEra['threePtPct'].mean():.1%}")
+
+    print(f"\nNew Era (1997-2013):")
+    print(f"  Average attempts: {newEra['attemptsPerGame'].mean():.1f} per game")
+    print(f"  Shooting pct: {newEra['threePtPct'].mean():.1%}")
 
     print(f"\nModern NBA (2014-2023):")
     print(f"  Average attempts: {modern['attemptsPerGame'].mean():.1f} per game")
     print(f"  Shooting pct: {modern['threePtPct'].mean():.1%}")
 
-    # calculate the crazy increase using ratio math
-    increaseRatio = (modern['attemptsPerGame'].mean() /
-                     oldSchool['attemptsPerGame'].mean() - 1) * 100
-
-    print(f"\nTHE BIG PICTURE:")
-    print(f"  3-point attempts went up {increaseRatio:.0f}%!")
-    print(f"  Highest year: {data.loc[data['attemptsPerGame'].idxmax(), 'year']}")  # idxmax finds index of max value
-
-    # find some other interesting stuff using loc indexer
     bestShootingYr = data.loc[data['threePtPct'].idxmax()]
     worstShootingYr = data.loc[data['threePtPct'].idxmin()]
 
@@ -40,23 +36,6 @@ def printCoolStats(data):
         eraData = data[data['era'] == era]
         print(f"  {era}: {eraData['attemptsPerGame'].mean():.1f} attempts avg")
 
-
-# calculates year-over-year changes
-def findBiggestJumps(data):
-    # sort by year first using sort_values
-    dataSorted = data.sort_values('year')
-
-    # calculate yr-to-yr changes using diff() which subtracts previous row
-    dataSorted['changeFromPrevYr'] = dataSorted['attemptsPerGame'].diff()
-
-    print(f"\nBIGGEST YEAR-TO-YEAR JUMPS:")
-    biggestIncreases = dataSorted.nlargest(3, 'changeFromPrevYr')  # nlargest gets top 3
-
-    for _, row in biggestIncreases.iterrows():  # iterrows loops through df rows
-        if row['changeFromPrevYr'] > 0:  # only positive changes
-            print(f"  {int(row['year'])}: +{row['changeFromPrevYr']:.1f} more attempts")
-
-
 # basic summary stats - learned this in stats class
 def eraSummaryTable(data):
     print(f"\nSUMMARY TABLE BY ERA:")
@@ -64,22 +43,22 @@ def eraSummaryTable(data):
 
     # agg() applies multiple functions to grouped data
     summary = data.groupby('era').agg({
-        'attemptsPerGame': ['mean', 'std', 'min', 'max'],  # std=standard deviation
-        'threePtPct': ['mean'],
+        'attemptsPerGame': ['mean', 'std', 'min', 'max'],
+        'threePtPct': 'mean',
         'ptsPerGame': 'mean'
     }).round(2)  # round to 2 decimal places
 
     #
-    summary.columns = ['AvgAttempts', 'StdAttempts', 'MinAttempts', 'MaxAttempts',
-                       'AvgPct', 'AvgPts']
+    summary.columns = ['AvgAttempts', 'StdAttempts', 'MinAttempts',
+                       'MaxAttempts', 'AvgPct', 'AvgPts']
 
     print(summary)
 
 
 # returns structured data instead of printing
 def getMcpStatsAnalysis(data):
-    oldSchool = data[data['era'] == 'Old School']
-    growing = data[data['era'] == 'Growing Up']
+    oldEra = data[data['era'] == 'Old Era']
+    growing = data[data['era'] == 'New Era']
     modern = data[data['era'] == 'Modern Era']
 
     # calculate yr-over-yr changes
@@ -90,12 +69,12 @@ def getMcpStatsAnalysis(data):
     return {
         'mcpToolUsed': 'getMcpStatsAnalysis',
         'eraComparison': {
-            'oldSchool': {
-                'avgAttempts': round(oldSchool['attemptsPerGame'].mean(), 2),
-                'avgPct': round(oldSchool['threePtPct'].mean(), 3),
+            'oldEra': {
+                'avgAttempts': round(oldEra['attemptsPerGame'].mean(), 2),
+                'avgPct': round(oldEra['threePtPct'].mean(), 3),
                 'yearRange': '1984-1996'
             },
-            'growingUp': {
+            'newEra': {
                 'avgAttempts': round(growing['attemptsPerGame'].mean(), 2),
                 'avgPct': round(growing['threePtPct'].mean(), 3),
                 'yearRange': '1997-2013'
@@ -108,7 +87,7 @@ def getMcpStatsAnalysis(data):
         },
         'overallTrends': {
             'totalIncreasePct': round(
-                (modern['attemptsPerGame'].mean() / oldSchool['attemptsPerGame'].mean() - 1) * 100, 1),
+                (modern['attemptsPerGame'].mean() / oldEra['attemptsPerGame'].mean() - 1) * 100, 1),
             'peakYear': int(data.loc[data['attemptsPerGame'].idxmax(), 'year']),
             'biggestYearlyJump': {
                 'year': int(biggestJump['year']),
@@ -117,9 +96,7 @@ def getMcpStatsAnalysis(data):
         }
     }
 
-
-# runs all the stats funcs - main entry point for analysis
+# runs all the stats funcs
 def runAllStats(data):
     printCoolStats(data)
-    findBiggestJumps(data)
     eraSummaryTable(data)
