@@ -65,13 +65,13 @@ def eraSummaryTable(data):
     # agg() applies multiple functions to grouped data
     summary = data.groupby('era').agg({
         'attemptsPerGame': ['mean', 'std', 'min', 'max'],  # std=standard deviation
-        'threePtPct': ['mean', 'std'],
+        'threePtPct': ['mean'],
         'ptsPerGame': 'mean'
     }).round(2)  # round to 2 decimal places
 
     #
     summary.columns = ['AvgAttempts', 'StdAttempts', 'MinAttempts', 'MaxAttempts',
-                       'AvgPct', 'StdPct', 'AvgPts']
+                       'AvgPct', 'AvgPts']
 
     print(summary)
 
