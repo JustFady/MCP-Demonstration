@@ -58,7 +58,7 @@ def eraSummaryTable(data):
 # returns structured data instead of printing
 def getMcpStatsAnalysis(data):
     oldEra = data[data['era'] == 'Old Era']
-    growing = data[data['era'] == 'New Era']
+    newEra = data[data['era'] == 'New Era']
     modern = data[data['era'] == 'Modern Era']
 
     # calculate yr-over-yr changes
@@ -75,8 +75,8 @@ def getMcpStatsAnalysis(data):
                 'yearRange': '1984-1996'
             },
             'newEra': {
-                'avgAttempts': round(growing['attemptsPerGame'].mean(), 2),
-                'avgPct': round(growing['threePtPct'].mean(), 3),
+                'avgAttempts': round(newEra['attemptsPerGame'].mean(), 2),
+                'avgPct': round(newEra['threePtPct'].mean(), 3),
                 'yearRange': '1997-2013'
             },
             'modernEra': {

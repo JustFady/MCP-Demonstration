@@ -4,8 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="eb1e20a9-6c27-4af7-964d-658b75340087" name="Changes" comment="cleaned out plotting bugs">
+    <list default="true" id="eb1e20a9-6c27-4af7-964d-658b75340087" name="Changes" comment="Final Touches/cleaning">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data_generator.py" beforeDir="false" afterPath="$PROJECT_DIR$/data_generator.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/stats_calculator.py" beforeDir="false" afterPath="$PROJECT_DIR$/stats_calculator.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -111,7 +114,7 @@
       <updated>1757364869006</updated>
       <workItem from="1757364880941" duration="726000" />
       <workItem from="1757365620052" duration="7000" />
-      <workItem from="1757365633666" duration="13791000" />
+      <workItem from="1757365633666" duration="15103000" />
     </task>
     <task id="LOCAL-00001" summary="Initial Commit">
       <option name="closed" value="true" />
@@ -153,7 +156,15 @@
       <option name="project" value="LOCAL" />
       <updated>1757432232574</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Final Touches/cleaning">
+      <option name="closed" value="true" />
+      <created>1757432968678</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1757432968678</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -176,9 +187,10 @@
     <MESSAGE value="fixed fetch era error" />
     <MESSAGE value="removed std dev to better present summary table" />
     <MESSAGE value="cleaned out plotting bugs" />
-    <option name="LAST_COMMIT_MESSAGE" value="cleaned out plotting bugs" />
+    <MESSAGE value="Final Touches/cleaning" />
+    <option name="LAST_COMMIT_MESSAGE" value="Final Touches/cleaning" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/MCP_analytics$main.coverage" NAME="main Coverage Results" MODIFIED="1757431851881" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/MCP_analytics$main.coverage" NAME="main Coverage Results" MODIFIED="1757433202143" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

@@ -47,7 +47,7 @@ def getEraName(yr):
 def saveDataForMcp():
     df = createNbaData()
 
-    # save as CSV for human analysis
+    # save as CSV
     df.to_csv('nba_data.csv', index=False)
 
     # save as JSON for MCP tools

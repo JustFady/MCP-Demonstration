@@ -32,10 +32,10 @@ def main():
 # get our realistic fake data
     nbaData = createNbaData()
 
-    # demonstrate MCP protocol usage first
+    # protocol usage first
     demonstrateMcpUsage()
 
-    # then show  analysis
+    # then show analysis
     runAllStats(nbaData)
 
     # these function calls could be made by an AI agent via MCP
