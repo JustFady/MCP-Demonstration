@@ -29,28 +29,16 @@ def demonstrateMcpUsage():
     print("   MCP Response:")
     print(json.dumps(mcpAnalysis, indent=4))
 
-    print("\n" + "=" * 60)
-    print("This is how MCP enables AI agents to access our basketball tools!")
-    print("=" * 60)
-
-
 # runs the whole analysis with MCP integration
 def main():
-    print("NBA 3-Point Analysis with MCP Integration")
-    print("This demonstrates how AI agents could use these tools\n")
-
-    # get our realistic fake data
+# get our realistic fake data
     nbaData = createNbaData()
 
     # demonstrate MCP protocol usage first
     demonstrateMcpUsage()
 
     # then show  analysis
-    print("\nNow running traditional statistical analysis...")
     runAllStats(nbaData)
-
-    # create all the visualizations
-    print("\nGenerating plots... (close each window to see next one)")
 
     # these function calls could be made by an AI agent via MCP
     plotAttemptsTimeline(nbaData)
