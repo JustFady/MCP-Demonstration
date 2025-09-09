@@ -16,7 +16,7 @@ def demonstrateMcpUsage():
 
     # simulate an AI agent requesting era-specific data through MCP
     print("1. AI Agent Request: 'Get stats for Modern Era'")
-    analyticsStats = getEraStatsForMcp("Modern era")
+    analyticsStats = getEraStatsForMcp("Modern Era")
     print("\tMCP Response:")
     print(json.dumps(analyticsStats, indent=4))
 
